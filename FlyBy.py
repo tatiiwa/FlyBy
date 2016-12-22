@@ -34,9 +34,21 @@ class FlyByWindow(arcade.Window):
     def animate(self, delta):
         self.world.animate(delta)
 
-    def draw_platforms(self, platforms):
-        for p in platforms:
-            arcade.draw_rectangle_filled(p.x + p.width // 2,
-                                         p.y - p.height // 2,
-                                         p.width, p.height,
-                                         arcade.color.WHITE)
+    def on_draw(self):
+        arcade.set_viewport(self.world.dot.x - SCREEN_WIDTH // 2,
+                            self.world.dot.x + SCREEN_WIDTH // 2,
+                            0, SCREEN_HEIGHT)
+
+        arcade.start_render()
+        self.dot_sprite.draw()
+        gl.glDisable(gl.GL_TEXTURE_2D)
+
+        
+
+    def on_key_press(self, key, key_modifiers):
+        self.world.on_key_press(key, key_modifiers)
+
+if __name__ == '__main__':
+    window = FlyByWindow(SCREEN_WIDTH, SCREEN_HEIGHT)
+    arcade.set_window(window)
+    arcade.run()

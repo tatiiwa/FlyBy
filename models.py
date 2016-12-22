@@ -24,8 +24,6 @@ class Dot(Model):
         self.platform = None
 
     def move(self):
-        if not self.platform:
-            return
 
         if not self.is_move:
             self.is_move = True
@@ -41,15 +39,7 @@ class Dot(Model):
             self.x += self.vx
             self.vy += MAGNET
 
-            new_platform = self.find_touching_platform()
-            if new_platform:
-                self.vx = 0
-                self.set_platform(new_platform)
-        else:
-            if (self.platform) and (not self.is_on_platform(self.platform)):
-                self.platform = None
-                self.is_move = True
-                self.vx = 0
+            
 
 class World:
     def __init__(self, width, height):
@@ -65,4 +55,7 @@ class World:
 
     def animate(self, delta):
         self.dot.animate(delta)
-        
+
+    def on_key_press(self, key, key_modifiers):
+        if key == arcade.key.SPACE:
+            self.dot.jump()
