@@ -26,14 +26,13 @@ class FlyByGameWindow(arcade.Window):
 
         self.world = World(width, height)
         self.paper_sprite = ModelSprite('images/Paper.png',model=self.world.paper)
+        self.gameover_sprite = ModelSprite('images/gameover.png',model=self.world.paper)
         self.building_sprite = []
         for i in range(0,4):
             self.building_sprite.append(ModelSprite('images/Building.png',model=self.world.building[i]))
 
     def on_draw(self):
-        # arcade.set_viewport(self.world.paper.y - SCREEN_HEIGHT // 2,
-        #                     self.world.paper.y + SCREEN_HEIGHT // 2,
-        #                     0, SCREEN_WIDTH)
+
         arcade.start_render()
         for sprite in self.building_sprite:
             sprite.draw()
@@ -42,6 +41,8 @@ class FlyByGameWindow(arcade.Window):
         arcade.draw_text(str(self.world.life),
                          self.width - 30, self.height - 30,
                          arcade.color.RED, 20)
+        if self.world.life == 0:
+            self.gameover_sprite.draw()
 
     def animate(self, delta):
         self.world.animate(delta)

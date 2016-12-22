@@ -56,6 +56,12 @@ class Paper(Model):
 class Building(Model):
     def __init__(self, world, x, y):
         super().__init__(world, x, y, 0)
+    def animate(self, delta):
+        self.y -= 5
+        if self.y == 0 :
+            self.y = self.world.height
+
+
 
 class World:
     def __init__(self, width, height):
@@ -63,10 +69,11 @@ class World:
         self.height = height
         self.life = 5
 
-        self.paper = Paper(self, 100, 100)
+        self.paper = Paper(self, 300, 0)
         self.building = []
+        pos = [[100,100],[100,500],[500,400],[300,300]]
         for i in range (0,4):
-            self.building.append(Building(self, 100*(i+1), 100*(i+1)))
+            self.building.append(Building(self, pos[i][0],pos[i][1]))
 
 
     def animate(self, delta):
@@ -74,6 +81,7 @@ class World:
         for i in range (0,4):
             if len(self.building) > 0 and self.paper.hit(self.building[i], 15):
                 self.life -= 1
+                self.building.animate(delta)
 
     def on_key_press(self, key, key_modifiers):
         if key == arcade.key.D:
