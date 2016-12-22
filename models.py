@@ -1,6 +1,6 @@
 import arcade.key
 import random
-
+import time
 class Model:
     def __init__(self, world, x, y, angle):
         self.world = world
@@ -55,13 +55,13 @@ class Paper(Model):
 
 class Building(Model):
     def __init__(self, world, x, y):
-        super().__init__(world, x, y, 0)
+        self.angle = 0
+        self.y = 600+y
+        self.x = x
     def animate(self, delta):
-        self.y -= 5
-        if self.y == 0 :
-            self.y = self.world.height
-
-
+        self.y -= 100
+        if self.y == 0:
+           self.y = 600
 
 class World:
     def __init__(self, width, height):
@@ -78,10 +78,12 @@ class World:
 
     def animate(self, delta):
         self.paper.animate(delta)
+
         for i in range (0,4):
-            if len(self.building) > 0 and self.paper.hit(self.building[i], 15):
-                self.life -= 1
-                self.building.animate(delta)
+            if len(self.building) > 0:
+                self.building[i].animate(delta)
+                if self.paper.hit(self.building[i], 15):
+                    self.life -= 1
 
     def on_key_press(self, key, key_modifiers):
         if key == arcade.key.D:
