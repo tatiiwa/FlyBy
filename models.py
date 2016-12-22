@@ -1,4 +1,5 @@
 import arcade.key
+import random
 
 class Model:
     def __init__(self, world, x, y, angle):
@@ -38,15 +39,19 @@ class Paper(Model):
         if self.direction == Paper.Forward:
             if self.y > self.world.height:
                 self.y = 0
-            self.y += 5
+            self.y += 2
+            self.x -= 2
+
         elif self.direction == Paper.Right:
             if self.x > self.world.width:
                 self.x = 0
-            self.x += 5
+            self.x += 3
+            self.y += 1
         elif self.direction == Paper.Left:
             if self.x == 0:
                self.x = self.world.width
-            self.x -= 5
+            self.x -= 3
+            self.y += 1
 
 class Building(Model):
     def __init__(self, world, x, y):
@@ -59,12 +64,16 @@ class World:
         self.life = 5
 
         self.paper = Paper(self, 100, 100)
-        self.building = Building(self, 400, 400)
+        self.building = []
+        for i in range (0,4):
+            self.building.append(Building(self, 100*(i+1), 100*(i+1)))
+
 
     def animate(self, delta):
         self.paper.animate(delta)
-        if self.paper.hit(self.building, 15):
-            self.life -= 1
+        for i in range (0,4):
+            if len(self.building) > 0 and self.paper.hit(self.building[i], 15):
+                self.life -= 1
 
     def on_key_press(self, key, key_modifiers):
         if key == arcade.key.D:
