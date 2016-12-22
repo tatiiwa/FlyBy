@@ -62,6 +62,11 @@ class Building(Model):
         self.y -= 2
         if self.y == 0:
            self.y = 600
+class Gameover:
+    def __init__(self, world, x, y):
+        self.angle = 0
+        self.y = 300
+        self.x = 300
 
 class World:
     def __init__(self, width, height):
@@ -70,6 +75,7 @@ class World:
         self.life = 5
 
         self.paper = Paper(self, 300, 0)
+        self.gameover = Gameover(self, 300, 300)
         self.building = []
         pos = [[100,100],[100,500],[500,400],[300,300]]
         for i in range (0,4):
