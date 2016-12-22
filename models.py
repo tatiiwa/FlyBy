@@ -54,6 +54,19 @@ class Paper(Model):
             self.x -= 3
             self.y += 1
 
+# class Papers(Model):
+#     def __init__(self, world, x, y):
+#         self.angle = 0
+#         self.y = 100+y
+#         self.x = x
+#     def animate(self, delta):
+#         self.x += 2
+#         self.y -= 2
+#         if self.y == 0:
+#            self.y = 600
+#         if self.x == 0:
+#            self.x == 600
+
 class Building(Model):
     def __init__(self, world, x, y):
         self.angle = 0
@@ -63,6 +76,7 @@ class Building(Model):
         self.y -= 2
         if self.y == 0:
            self.y = 600
+
 class MainMenu:
     def __init__(self, world, x, y):
         self.angle = 0
@@ -80,24 +94,36 @@ class World:
         self.width = width
         self.height = height
         self.life = 5
+        self.score = 0
 
         self.paper = Paper(self, 300, 0)
         self.gameover = Gameover(self, 300, 300)
         self.mainmenu = MainMenu(self, 300, 300)
+
         self.building = []
-        pos = [[100,100],[100,500],[500,400],[300,300]]
-        for i in range (0,4):
-            self.building.append(Building(self, pos[i][0],pos[i][1]))
+        #self.papers = []
+        posi = [[100,100],[100,500],[500,400],[300,300],[300,500]]
+        for i in range (0,5):
+            self.building.append(Building(self, posi[i][0],posi[i][1]))
+
+
+
 
 
     def animate(self, delta):
         self.paper.animate(delta)
-
-        for i in range (0,4):
+        self.score += delta
+        for i in range (0,5):
             if len(self.building) > 0:
                 self.building[i].animate(delta)
-                if self.paper.hit(self.building[i], 15):
+                if self.paper.hit(self.building[i], 30):
                     self.life -= 1
+
+        # for j in range (0,5):
+        #     if len(self.papers) > 0:
+        #         self.papers[j].animate(delta)
+        #         if self.paper.hit(self.papers[j], 15):
+        #             self.score += delta
 
     def on_key_press(self, key, key_modifiers):
         global Check
