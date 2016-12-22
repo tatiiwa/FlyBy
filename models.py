@@ -48,6 +48,7 @@ class Paper(Model):
                 self.x = 0
             self.x += 3
             self.y += 1
+
         elif self.direction == Paper.Left:
             if self.x == 0:
                self.x = self.world.width
@@ -69,13 +70,17 @@ class Paper(Model):
 
 class Building(Model):
     def __init__(self, world, x, y):
+        super().__init__(world, x, y, 0)
         self.angle = 0
         self.y = 100+y
         self.x = x
     def animate(self, delta):
         self.y -= 2
-        if self.y == 0:
-           self.y = 600
+        self.x -= 2
+        if self.x == 0:
+            self.x = self.world.width
+        if self.y > self.world.height:
+            self.y = 0
 
 class Screen:
     def __init__(self, world, x, y):
