@@ -28,7 +28,7 @@ class FlyByGameWindow(arcade.Window):
 
         self.world = World(width, height)
         self.paper_sprite = ModelSprite('images/Paper.png',model=self.world.paper)
-
+        self.background_sprite = ModelSprite('images/background.jpg',model=self.world.background)
         self.mainmenu_sprite = ModelSprite('images/Mainmenu.png',model=self.world.mainmenu)
         self.gameover_sprite = ModelSprite('images/gameover.png',model=self.world.gameover)
         self.building_sprite = []
@@ -40,8 +40,10 @@ class FlyByGameWindow(arcade.Window):
     def on_draw(self):
 
         arcade.start_render()
+        self.background_sprite.draw()
         if models.Check == False :
          self.mainmenu_sprite.draw()
+
 
         i = 0
 
@@ -59,16 +61,16 @@ class FlyByGameWindow(arcade.Window):
          self.paper_sprite.draw()
 
          arcade.draw_text(str("Life :"),
-                          self.width - 110, self.height - 30,
+                          self.width - 120, self.height - 30,
                           arcade.color.YELLOW, 20)
          arcade.draw_text(str(self.world.life),
-                          self.width - 30, self.height - 30,
+                          self.width - 40, self.height - 30,
                           arcade.color.WHITE, 20)
          arcade.draw_text(str("Score :"),
-                          self.width - 110, self.height - 50,
+                          self.width - 120, self.height - 50,
                           arcade.color.ORANGE, 20)
          arcade.draw_text(str(self.world.score),
-                          self.width - 30, self.height - 50,
+                          self.width - 40, self.height - 50,
                           arcade.color.WHITE, 20)
          if self.world.life == 0:
              self.gameover_sprite.draw()
