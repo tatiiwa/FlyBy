@@ -1,6 +1,7 @@
 import arcade.key
 import random
 import time
+Check = False
 class Model:
     def __init__(self, world, x, y, angle):
         self.world = world
@@ -24,11 +25,11 @@ class Paper(Model):
 
     def switch_direction(self):
             self.direction = Paper.Right
-            self.angle = -90
+            self.angle = -45
 
     def switch_direction2(self):
             self.direction = Paper.Left
-            self.angle = 90
+            self.angle = 45
 
     def switch_direction3(self):
             self.direction = Paper.Forward
@@ -62,6 +63,12 @@ class Building(Model):
         self.y -= 2
         if self.y == 0:
            self.y = 600
+class MainMenu:
+    def __init__(self, world, x, y):
+        self.angle = 0
+        self.y = 300
+        self.x = 300
+
 class Gameover:
     def __init__(self, world, x, y):
         self.angle = 0
@@ -76,6 +83,7 @@ class World:
 
         self.paper = Paper(self, 300, 0)
         self.gameover = Gameover(self, 300, 300)
+        self.mainmenu = MainMenu(self, 300, 300)
         self.building = []
         pos = [[100,100],[100,500],[500,400],[300,300]]
         for i in range (0,4):
@@ -92,9 +100,12 @@ class World:
                     self.life -= 1
 
     def on_key_press(self, key, key_modifiers):
+        global Check
         if key == arcade.key.D:
             self.paper.switch_direction()
         if key == arcade.key.A:
             self.paper.switch_direction2()
         if key == arcade.key.W:
             self.paper.switch_direction3()
+        if key == arcade.key.SPACE and Check == False :
+            Check = True
