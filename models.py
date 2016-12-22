@@ -7,6 +7,9 @@ class Model:
         self.y = y
         self.angle = 0
 
+    def hit(self, other, hit_size):
+        return (abs(self.x - other.x) <= hit_size) and (abs(self.y - other.y) <= hit_size)
+
 class Paper(Model):
     Right = 0
     Forward = 1
@@ -53,12 +56,15 @@ class World:
     def __init__(self, width, height):
         self.width = width
         self.height = height
+        self.life = 5
 
         self.paper = Paper(self, 100, 100)
         self.building = Building(self, 400, 400)
 
     def animate(self, delta):
         self.paper.animate(delta)
+        if self.paper.hit(self.building, 15):
+            self.life -= 1
 
     def on_key_press(self, key, key_modifiers):
         if key == arcade.key.D:

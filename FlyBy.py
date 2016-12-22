@@ -22,7 +22,7 @@ class FlyByGameWindow(arcade.Window):
     def __init__(self, width, height):
         super().__init__(width, height)
 
-        arcade.set_background_color(arcade.color.WHITE)
+        arcade.set_background_color(arcade.color.BLACK)
 
         self.world = World(width, height)
         self.paper_sprite = ModelSprite('images/Paper.png',model=self.world.paper)
@@ -32,6 +32,10 @@ class FlyByGameWindow(arcade.Window):
         arcade.start_render()
         self.building_sprite.draw()
         self.paper_sprite.draw()
+
+        arcade.draw_text(str(self.world.life),
+                         self.width - 30, self.height - 30,
+                         arcade.color.RED, 20)
 
     def animate(self, delta):
         self.world.animate(delta)
