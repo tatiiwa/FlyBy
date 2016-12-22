@@ -56,10 +56,10 @@ class Paper(Model):
 class Building(Model):
     def __init__(self, world, x, y):
         self.angle = 0
-        self.y = 600+y
+        self.y = 100+y
         self.x = x
     def animate(self, delta):
-        self.y -= 100
+        self.y -= 2
         if self.y == 0:
            self.y = 600
 
