@@ -75,12 +75,9 @@ class Building(Model):
         self.y = 100+y
         self.x = x
     def animate(self, delta):
-        self.y -= 2
-        self.x -= 2
-        if self.x == 0:
-            self.x = self.world.width
-        if self.y > self.world.height:
-            self.y = 0
+        self.y -= 3
+        if self.y == 0 :
+           self.y = 600
 
 class Screen:
     def __init__(self, world, x, y):
@@ -88,15 +85,15 @@ class Screen:
         self.y = 300
         self.x = 300
 
-class Background:
-    def __init__(self, world, x, y):
-        self.angle = 0
-        self.y = 300
-        self.x = 300
-    def animate(self, delta):
-        self.y -= 2
-        if self.y == 0:
-           self.y = 600
+# class Background:
+#     def __init__(self, world, x, y):
+#         self.angle = 0
+#         self.y = 300
+#         self.x = 300
+#     def animate(self, delta):
+#         self.y -= 2
+#         if self.y == 0:
+#            self.y = 600
 
 
 class World:
@@ -109,10 +106,9 @@ class World:
         self.paper = Paper(self, 300, 0)
         self.gameover = Screen(self, 300, 300)
         self.mainmenu = Screen(self, 300, 300)
-        self.background = Background(self, 300, 300)
+        self.background = Screen(self, 300, 300)
 
         self.building = []
-        #self.papers = []
         posi = [[100,100],[100,500],[500,400],[300,300],[400,600]]
         for i in range (0,5):
             self.building.append(Building(self, posi[i][0],posi[i][1]))
@@ -123,7 +119,6 @@ class World:
 
     def animate(self, delta):
         self.paper.animate(delta)
-        self.background.animate(delta)
         self.score += delta
         for i in range (0,5):
             if len(self.building) > 0:
