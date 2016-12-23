@@ -32,10 +32,9 @@ class FlyByGameWindow(arcade.Window):
         self.mainmenu_sprite = ModelSprite('images/Mainmenu.png',model=self.world.mainmenu)
         self.gameover_sprite = ModelSprite('images/gameover.png',model=self.world.gameover)
         self.building_sprite = []
-        #self.papers_sprite = []
-        for i in range(0,7):
+        for i in range(0,8):
             self.building_sprite.append(ModelSprite('images/Building.png',model=self.world.building[i]))
-            #self.papers_sprite = ModelSprite('images/papers.png',model=self.world.papers[i])
+
 
     def on_draw(self):
 

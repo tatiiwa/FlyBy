@@ -97,9 +97,8 @@ class World:
         self.background = Background(self, 300, 300)
 
         self.building = []
-        #self.papers = []
-        posi = [[100,350],[200,150],[300,500],[350,300],[400,100],[500,200],[550,450]]
-        for i in range (0,7):
+        posi = [[100,350],[150,550],[200,150],[300,500],[350,300],[400,100],[500,200],[550,450]]
+        for i in range (0,8):
             self.building.append(Building(self, posi[i][0],posi[i][1]))
 
 
@@ -110,17 +109,13 @@ class World:
         self.paper.animate(delta)
         self.background.animate(delta)
         self.score += delta
-        for i in range (0,7):
+        for i in range (0,8):
             if len(self.building) > 0:
                 self.building[i].animate(delta)
                 if self.paper.hit(self.building[i], 50):
                     self.life -= 1
 
-        # for j in range (0,5):
-        #     if len(self.papers) > 0:
-        #         self.papers[j].animate(delta)
-        #         if self.paper.hit(self.papers[j], 15):
-        #             self.score += delta
+
 
     def on_key_press(self, key, key_modifiers):
         global Check
