@@ -41,8 +41,8 @@ class Paper(Model):
         if self.direction == Paper.Forward:
             if self.y > self.world.height:
                 self.y = 0
-            self.y += 2
-            self.x -= 2
+            self.y += 1
+            #self.x -= 2
 
         elif self.direction == Paper.Right:
             if self.x > self.world.width:
@@ -63,7 +63,7 @@ class Building(Model):
         self.y = 100+y
         self.x = x
     def animate(self, delta):
-        self.y -= 2
+        self.y -= 1
         if self.y == 0:
            self.y = 600
 
@@ -79,7 +79,7 @@ class Background:
         self.y = 300
         self.x = 300
     def animate(self, delta):
-        self.y -= 2
+        self.y -= 1
         if self.y == 0:
            self.y = 600
 
@@ -112,7 +112,7 @@ class World:
         for i in range (0,8):
             if len(self.building) > 0:
                 self.building[i].animate(delta)
-                if self.paper.hit(self.building[i], 50):
+                if self.paper.hit(self.building[i], 40):
                     self.life -= 1
 
 
