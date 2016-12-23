@@ -33,7 +33,7 @@ class FlyByGameWindow(arcade.Window):
         self.gameover_sprite = ModelSprite('images/gameover.png',model=self.world.gameover)
         self.building_sprite = []
         #self.papers_sprite = []
-        for i in range(0,5):
+        for i in range(0,6):
             self.building_sprite.append(ModelSprite('images/Building.png',model=self.world.building[i]))
             #self.papers_sprite = ModelSprite('images/papers.png',model=self.world.papers[i])
 

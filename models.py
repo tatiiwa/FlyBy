@@ -108,8 +108,8 @@ class World:
 
         self.building = []
         #self.papers = []
-        posi = [[100,100],[100,500],[500,400],[300,300],[400,600]]
-        for i in range (0,5):
+        posi = [[100,150],[100,450],[500,400],[300,500],[400,600],[250,200]]
+        for i in range (0,6):
             self.building.append(Building(self, posi[i][0],posi[i][1]))
 
 
@@ -120,7 +120,7 @@ class World:
         self.paper.animate(delta)
         self.background.animate(delta)
         self.score += delta
-        for i in range (0,5):
+        for i in range (0,6):
             if len(self.building) > 0:
                 self.building[i].animate(delta)
                 if self.paper.hit(self.building[i], 30):
