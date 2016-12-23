@@ -98,7 +98,7 @@ class World:
 
         self.building = []
         #self.papers = []
-        posi = [[100,500],[150,100],[250,300],[300,550],[500,200],[550,500],[400,250]]
+        posi = [[100,350],[200,150],[300,500],[350,300],[400,100],[500,200],[550,450]]
         for i in range (0,7):
             self.building.append(Building(self, posi[i][0],posi[i][1]))
 
