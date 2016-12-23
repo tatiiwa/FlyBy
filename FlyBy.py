@@ -33,7 +33,7 @@ class FlyByGameWindow(arcade.Window):
         self.gameover_sprite = ModelSprite('images/gameover.png',model=self.world.gameover)
         self.building_sprite = []
         #self.papers_sprite = []
-        for i in range(0,6):
+        for i in range(0,7):
             self.building_sprite.append(ModelSprite('images/Building.png',model=self.world.building[i]))
             #self.papers_sprite = ModelSprite('images/papers.png',model=self.world.papers[i])
 
@@ -50,7 +50,6 @@ class FlyByGameWindow(arcade.Window):
         if models.Check == True :
          for sprite in self.building_sprite:
              sprite.center_y = self.world.building[i]
-             #sprite.center_y = self.world.papers[i]
              sprite.draw()
              i+=1
 
@@ -61,16 +60,16 @@ class FlyByGameWindow(arcade.Window):
          self.paper_sprite.draw()
 
          arcade.draw_text(str("Life :"),
-                          self.width - 120, self.height - 30,
+                          self.width - 130, self.height - 30,
                           arcade.color.YELLOW, 20)
          arcade.draw_text(str(self.world.life),
-                          self.width - 40, self.height - 30,
+                          self.width - 50, self.height - 30,
                           arcade.color.WHITE, 20)
          arcade.draw_text(str("Score :"),
-                          self.width - 120, self.height - 50,
+                          self.width - 130, self.height - 50,
                           arcade.color.ORANGE, 20)
          arcade.draw_text(str(self.world.score),
-                          self.width - 40, self.height - 50,
+                          self.width - 50, self.height - 50,
                           arcade.color.WHITE, 20)
          if self.world.life == 0:
              self.gameover_sprite.draw()

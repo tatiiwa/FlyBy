@@ -1,6 +1,7 @@
 import arcade.key
 import random
 import time
+import math
 Check = False
 class Model:
     def __init__(self, world, x, y, angle):
@@ -54,18 +55,7 @@ class Paper(Model):
             self.x -= 3
             self.y += 1
 
-# class Papers(Model):
-#     def __init__(self, world, x, y):
-#         self.angle = 0
-#         self.y = 100+y
-#         self.x = x
-#     def animate(self, delta):
-#         self.x += 2
-#         self.y -= 2
-#         if self.y == 0:
-#            self.y = 600
-#         if self.x == 0:
-#            self.x == 600
+
 
 class Building(Model):
     def __init__(self, world, x, y):
@@ -98,7 +88,7 @@ class World:
     def __init__(self, width, height):
         self.width = width
         self.height = height
-        self.life = 5
+        self.life = 100
         self.score = 0
 
         self.paper = Paper(self, 300, 0)
@@ -108,8 +98,8 @@ class World:
 
         self.building = []
         #self.papers = []
-        posi = [[100,150],[100,450],[500,400],[300,500],[400,600],[250,200]]
-        for i in range (0,6):
+        posi = [[100,500],[150,100],[250,300],[300,550],[500,200],[550,500],[400,250]]
+        for i in range (0,7):
             self.building.append(Building(self, posi[i][0],posi[i][1]))
 
 
@@ -120,10 +110,10 @@ class World:
         self.paper.animate(delta)
         self.background.animate(delta)
         self.score += delta
-        for i in range (0,6):
+        for i in range (0,7):
             if len(self.building) > 0:
                 self.building[i].animate(delta)
-                if self.paper.hit(self.building[i], 30):
+                if self.paper.hit(self.building[i], 50):
                     self.life -= 1
 
         # for j in range (0,5):
